@@ -16,7 +16,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Quote> list = [
+  List<Quote> quotes = [
     Quote(author: 'Abc Xyz', text: 'I have a pen'),
     Quote(author: 'Abc Xyz', text: 'Why do you have the map of the world'),
     Quote(author: 'Abc Xyz', text: 'Now, you have the toy')
@@ -32,10 +32,14 @@ class _HomeState extends State<Home> {
 
     final body = Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: list
-            .map((e) => QuoteCard(
-                  quote: e,
-                ))
+        children: quotes
+            .map((quote) => QuoteCard(
+                quote: quote,
+                onDelete: () {
+                  setState(() {
+                    quotes.remove(quote);
+                  });
+                }))
             .toList());
 
     return Scaffold(
